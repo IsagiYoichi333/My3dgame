@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
             tubes[i].transform.position = new Vector3(x, y, 0f);
 
             col++;
-            if col >= columns
+            if (col >= columns)
             {
                 col = 0;
                 row++;
