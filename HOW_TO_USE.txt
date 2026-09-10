@@ -1,0 +1,57 @@
+Unity Water Sort Oyunu - Kullanım Talimatları
+
+Bu proje, basit bir water sort (su sıralama) oyunu prototipi için iki C# script içerir:
+
+1. Assets/Scripts/Tube.cs
+   - Bir borunun (tube) davranışını tanımlar
+   - Boru renkli segmentleri tutabilir, kapasitesine sahiptir
+   - Segmentleri başka bir boroya dökme (pour) işlemini yönetir
+   - Renk matching ve kapasite kontrolü yapar
+
+2. Assets/Scripts/GameManager.cs
+   - Oyun kurulmasını, tube oluşturmasını yönetir
+   - Fare tıklamalarıyla tube seçme ve dökme işlemlerini 처리 eder
+   - Kazanma kontrolünü yapar
+
+Nasıl Kullanılır:
+
+1. Unity Editöründe proyi açın (My3dgame klasörü).
+
+2. Tube Prefabı oluşturun:
+   - Hierarchy pane'ında, 3D Object -> Cylinder (veya Cube) seçerek bir obje oluşturun
+   - Bu objeyi yeniden adlandırın: "TubePrefab"
+   - Tube.cs script'ini bu objeye ekleyin (Component -> Scripts -> Tube, veya sürükle-bırak)
+   - Objeyi Prefab haline getirmek için Project pane'ına sürükleyin
+   - Şimdi sahneye bu objeyi tekrar eklemek yerine, bu prefab'ı kullanacağız
+
+3. Oyun Yöneticisini Kurun:
+   - Hierarchy'de sağ tık -> Create Empty, isimlendirin: "GameManager"
+   - GameManager.cs script'ini bu objeye ekleyin
+   - GameManager компонентininInspector'ında:
+        * Tube Prefab alanına, oluşturduğunuz TubePrefab'ı sürükleyin
+        * Tubes Parent alanına, GameManager objesinin kendisini veya başka bir boş objeyi (örn: "TubesContainer") seçebilirsiniz
+
+4. Oyunu Test Etmek:
+   - Play butonuna basın
+   - Fareyle bir tube'e tıklayarak seçin (seçili tube vurgulanacak, henüz görsel olarak değil ama kod içinde)
+   - Başka bir tube'e tıklayarak seçili tube'den dökmeyi deneyin
+   - Sadece üst renk aynı ve hedef tube'de yer varsa dökme işlemi başarılı olur
+
+5. Kazanma Koşulu:
+   - Her tube ya boş ya da tamamen tek renk dolu olduğunda oyun kazanılır
+   - Şu anda bu durum konsola log olarak yazılmaz, ancak GameManager.CheckWinCondition() metodu bu kontrolü yapar
+
+Notlar:
+- Bu prototip temel mekanikleri gösterir, görsel efektler, sesler, UI elementi eklemelisiniz.
+- Tube renkleri atualmente enum ile tanımlanmıştır (Kırmızı, Mavi, Yeşil, Sarı, Mor, Turuncu)
+- Her tube'nin kapasitesi 4 segment olarak ayarlanmıştır (Tube.cs içindeki capacity değiştirilebilir)
+- Başlangıçta 4 renk kullanılıyor ve 8 tube oluşturuluyor (2 tanesi boş başlar)
+
+Oyun mekaniği hakkında:
+- Bir tube'den sadece üstteki aynı renkli segmentler dökülebilir
+- Dökme işlemi, hedef tube boşsa veya üstteki aynı renkse ve yer varsa gerçekleşir
+- Bir tube'e sadece boşluk kadar segment dökülebilir
+
+Bu dosyayı proje kök dizinine ekledik. Herhangi bir sorunuz olursa, GitHub üzerinden issue açabilir veya PR gönderebilirsiniz.
+
+Keyifli kodlama!
